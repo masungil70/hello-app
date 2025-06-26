@@ -31,6 +31,9 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          pwd 
+          export KUBECONFIG=${{secrets.KUBECONFIG}} 
           kubectl apply -f k8s/
           kubectl rollout restart deployment hello-app
+
+
+          
