@@ -37,6 +37,8 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
+          source /home/masungil/.bashrc
+          kubectl config get-contexts
           export KUBECONFIG=~/.kube/config
           kubectl apply -f k8s/
           kubectl rollout restart deployment hello-app
