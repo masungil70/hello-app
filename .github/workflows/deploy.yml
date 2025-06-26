@@ -28,10 +28,16 @@ jobs:
           context: .
           push: true
           tags: masungil/hello-app:latest
+          
+      - name: Setup kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG_CONTENT }}" > ~/.kube/config
+          export KUBECONFIG=~/.kube/config
 
       - name: Deploy to Kubernetes
         run: |
-          source /home/masungil/.bashrc
+          export KUBECONFIG=~/.kube/config
           kubectl apply -f k8s/
           kubectl rollout restart deployment hello-app
 
