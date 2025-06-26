@@ -34,7 +34,9 @@ jobs:
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG_CONTENT }}" > ~/.kube/config
           export KUBECONFIG=~/.kube/config
-
+          chmod 600 ~/.kube/config
+          ls -ls ~/.kube/config
+          
       - name: Deploy to Kubernetes
         run: |
           source /home/masungil/.bashrc
